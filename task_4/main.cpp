@@ -26,7 +26,7 @@ struct Array{
         for (size_t i = 0; i < size; i++) {
             newData[i] = data[i];
         }
-        delete[] data; 
+        delete[] data;
         data = newData; //указатель на новый массив
         capacity = newCapacity;
     }
@@ -35,16 +35,42 @@ struct Array{
         if (size >= capacity) {
             resize();
         }
-        data[size++] = value; // заносим строку и увеличиваем размер
+        data[size++] = value;
     }
 
+    void recOutput(int count_elem){
+        for (size_t i = 0; i < size; ++i){
+            if (i + count_elem + 1 != size){
+                for (size_t j = i + 1; j + count_elem < size; j++){
+                    cout << " {" << data[i] << ", " << data[j];
 
-
-    void output(){
-        for (size_t i = 0; i < size; i++){
-            cout << data[i] << " ";
+                    if (count_elem != 0){
+                        int elem = 1;
+                        while (true){
+                            if (elem == count_elem){
+                                cout << ", " << data[j + elem];
+                                break;
+                            }else{
+                                cout << ", " << data[j + elem]; 
+                                elem ++;
+                            }
+                        }
+                    }
+                    cout << "}";
+                }
+            }
         }
-        cout << endl;
+    }
+    
+    void output(){
+        for (size_t i = 0; i < size; ++i){
+            cout << ", {" << data[i] << "}";
+        }
+
+        for (int i = 0; i < size; ++i){
+            recOutput(i); 
+        }
+
     }
 };
 
@@ -56,9 +82,11 @@ int main() {
     string elem;
 
     Array mass;
-    while (getline(ss, elem)){
+    while (ss >> elem){
         mass.push(elem);
     }
 
+    cout << "[{}";
     mass.output();
+    cout << "]" << endl;
 }
