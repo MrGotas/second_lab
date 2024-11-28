@@ -1,5 +1,3 @@
-// var 7
-
 #include <iostream>
 #include <string>
 #include <sstream>
