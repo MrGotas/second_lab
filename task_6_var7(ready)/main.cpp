@@ -168,20 +168,17 @@ int main(){
         }
     }
     // прородитель рода
-    bool exit = false;
+    string bilo;
     for (size_t i = 0; i < peoples.tableSize; ++i) {
         HashTable::KeyValuePair* current = peoples.table[i];
-        if (exit){
-            break;
-        }
         while (current != nullptr) {
             string val = current->value;
-            if (peoples.countKeys(val) == 0){
+            if (peoples.countKeys(val) == 0 && val != bilo){
                 int countDes = 0;
+                bilo = val;
                 tempSt.push(val);
                 peoples.findVal(countDes, tempSt);
                 outAr.push(val + " " + to_string(countDes));
-                exit = true;
                 break;
             }
             current = current->next;
